@@ -48,7 +48,7 @@ class TwoTowerRegressor(nn.Module):
 def load_all():
     device = torch.device("cpu")
 
-    model = torch.load("two_tower_model.pt", map_location=device)
+    model = torch.load("two_tower_model.pt", map_location=device, weights_only = False)
     model.eval()
 
     ratings_df = pd.read_csv(
