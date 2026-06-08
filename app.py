@@ -80,6 +80,10 @@ def get_poster(title, year=""):
     except:
         pass
     return None
+    # Temporary test — remove after confirming posters work
+test_url = get_poster("Toy Story", "1995")
+st.write(test_url)  # Should print a tmdb URL, not None
+
 
 @st.cache_data
 def fetch_all_posters(movies):
