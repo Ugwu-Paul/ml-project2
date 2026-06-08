@@ -91,11 +91,7 @@ def fetch_all_posters(movies):
             year = ""
         posters[item_idx] = get_poster(title, year)
     return posters
-    # Temporary test — remove after confirming posters work
-test_url = get_poster("Toy Story", "1995")
-st.write(test_url)  # Should print a tmdb URL, not None
-
-
+   
 # ── Helper functions ──────────────────────────────────────────────────────────
 def get_new_user_vector(rated_items, model, device, D=64, steps=300):
     model.eval()
@@ -175,7 +171,9 @@ for item_idx, title in MOVIES:
             st.write("🎬")
 
     with col2:
-        st.write(f"*{title}*")
+        st.write("")
+        st.write("")
+        st.markdown(f"### {title}")
         star = st.feedback("stars", key=f"star_{item_idx}")
         if star is not None:
             ratings[item_idx] = star + 1  # st.feedback returns 0-4, we want 1-5
@@ -204,12 +202,14 @@ if st.button(" Get Recommendations", use_container_width=True):
                     year = ""
                 poster_url = get_poster(rec["title"], year)
                 if poster_url:
-                    st.image(poster_url, width=100)
+                    st.image(poster_url, user_container_width=100)
                 else:
-                    st.write("🎬")
+                    st.write("")
 
             with col2:
-                st.write(f"*{i}. {rec['title']}*")
+                st.write("")
+                st.write("")
+                st.markdown(f"###{i}. {rec['title']}")
                 st.write(f"{rec['genre']}")
                 st.write(f"Predicted rating: {rec['score']:.1f}")
 
