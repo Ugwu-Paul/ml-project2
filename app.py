@@ -63,7 +63,7 @@ model, device, item_categories, movies_df = load_all()
 # ── TMDB poster fetching ──────────────────────────────────────────────────────
 TMDB_TOKEN = st.secrets["TMDB_TOKEN"]
 
-def get_poster(title, year=""):
+def get_poster_bytes(title, year=""):
     query = title.split("(")[0].strip()
     url = "https://api.themoviedb.org/3/search/movie"
     headers = {"Authorization": f"Bearer {TMDB_TOKEN}"}
@@ -76,13 +76,12 @@ def get_poster(title, year=""):
         if data.get("results"):
             poster_path = data["results"][0].get("poster_path")
             if poster_path:
-                return f"https://image.tmdb.org/t/p/w200{poster_path}"
+                img_url = f"https://image.tmdb.org/t/p/w200{poster_path}"
+                img_res = requests.get(img_url, timeout=5)
+                return img_res.content  # returns raw bytes
     except:
         pass
     return None
-    # Temporary test — remove after confirming posters work
-test_url = get_poster("Toy Story", "1995")
-st.write(test_url)  # Should print a tmdb URL, not None
 
 
 @st.cache_data
@@ -93,7 +92,7 @@ def fetch_all_posters(movies):
             year = title.split("(")[-1].replace(")", "").strip()
         except:
             year = ""
-        posters[item_idx] = get_poster(title, year)
+        posters[item_idx] = get_poster_bytes(title, year)
     return posters
    
 # ── Helper functions ──────────────────────────────────────────────────────────
@@ -170,7 +169,7 @@ for item_idx, title in MOVIES:
     with col1:
         poster_url = posters.get(item_idx)
         if poster_url:
-            st.image(poster_url, width=100)
+            st.image(poster_url, use_container_width=True)
         else:
             st.write("🎬")
 
