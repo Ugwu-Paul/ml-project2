@@ -212,7 +212,7 @@ if st.button(" Get Recommendations", use_container_width=True):
             with col2:
                 st.write("")
                 st.write("")
-                st.markdown(f"###{i}. {rec['title']}")
+                st.markdown(f"{i}. {rec['title']}")
                 st.write(f"{rec['genre']}")
                 st.write(f"Predicted rating: {rec['score']:.1f}")
 
