@@ -203,7 +203,7 @@ if st.button(" Get Recommendations", use_container_width=True):
                     year = rec["title"].split("(")[-1].replace(")", "").strip()
                 except:
                     year = ""
-                poster_url = get_poster(rec["title"], year)
+                poster_url = get_poster_bytes(rec["title"], year)
                 if poster_url:
                     st.image(poster_url, user_container_width=100)
                 else:
