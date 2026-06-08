@@ -94,6 +94,10 @@ def fetch_all_posters(movies):
             year = ""
         posters[item_idx] = get_poster(title, year)
     return posters
+    # Temporary test — remove after confirming posters work
+test_url = get_poster("Toy Story", "1995")
+st.write(test_url)  # Should print a tmdb URL, not None
+
 
 # ── Helper functions ──────────────────────────────────────────────────────────
 def get_new_user_vector(rated_items, model, device, D=64, steps=300):
