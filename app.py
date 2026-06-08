@@ -205,7 +205,7 @@ if st.button(" Get Recommendations", use_container_width=True):
                     year = ""
                 poster_url = get_poster_bytes(rec["title"], year)
                 if poster_url:
-                    st.image(poster_url, user_container_width=100)
+                    st.image(poster_url, use_container_width=True)
                 else:
                     st.write("")
 
