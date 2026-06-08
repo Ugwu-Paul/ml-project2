@@ -7,9 +7,6 @@ import numpy as np
 import requests
 import pickle
 
-# Temporary test — remove after confirming posters work
-test_url = get_poster("Toy Story", "1995")
-st.write(test_url)  # Should print a tmdb URL, not None
 
 
 # ── Page config ───────────────────────────────────────────────────────────────
